@@ -3,8 +3,11 @@
     "branch":            "master",
     "bugs":              "",
     "buildCommand": [
-        "cmd /c mkdir build",
-        "Compress-Archive -Path lang, LICENSE.txt, ProjectPages.php -CompressionLevel Optimal -DestinationPath build\\ProjectPages.zip"
+        "cmd /c xcopy lang\\* build\\ProjectPages\\lang /s /i /y",
+        "cmd /c copy /Y LICENSE.txt build\\ProjectPages",
+        "cmd /c copy /Y ProjectPages.php build\\ProjectPages",
+        "Compress-Archive -Path build\\ProjectPages -CompressionLevel Optimal -DestinationPath build\\ProjectPages.zip",
+        "cmd /c rmdir /S /Q build\\ProjectPages"
     ],
     "changelogFile":     "CHANGELOG.md",
     "deployCommand":     "",
