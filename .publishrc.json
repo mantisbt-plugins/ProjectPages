@@ -4,7 +4,7 @@
     "bugs":              "",
     "buildCommand": [
         "cmd /c mkdir build",
-        "Compress-Archive -Path api, core, files, lang, pages, templates, LICENSE.txt, ProjectPages.php -CompressionLevel Optimal -DestinationPath build\\ProjectPages.zip"
+        "Compress-Archive -Path lang, LICENSE.txt, ProjectPages.php -CompressionLevel Optimal -DestinationPath build\\ProjectPages.zip"
     ],
     "changelogFile":     "CHANGELOG.md",
     "deployCommand":     "",
