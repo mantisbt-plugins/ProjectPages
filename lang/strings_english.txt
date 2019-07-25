@@ -1,0 +1,9 @@
+<?php
+
+# Copyright (c) 2019 Scott Meesseman
+# Licensed under the Apache license
+
+$s_plugin_ProjectPages_ = '';
+$s_plugin_ProjectPages_title = 'ProjectPages';
+$s_plugin_ProjectPages_description = 'Add custom menu items by project';
+
