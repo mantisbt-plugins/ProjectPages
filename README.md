@@ -33,7 +33,13 @@ Install the plugin using the default installation procedure for a MantisBT plugi
 
 ## Usage
 
-The project_id is set to the project_id that the link is to be displayed for.  It may be `-1` to indicate all projects except for the "All Projects" view itself, and `-2` to indicate all projects, inculding the "All Projects" view.
+The project_id is set to the project_id that the link is to be displayed for, where:
+
+- `0` is the `All Projects` project
+- `-1` is all projects except for the `All Projects` project
+- `-2` is all projects
+
+Note that the keyword `project_name` in the URL text is replaced with the currently loaded MantisBT project's name.
 
 Example config_inc.php entry using ProjectPages plugin (and the IFramed plugin):
 
@@ -41,9 +47,19 @@ Example config_inc.php entry using ProjectPages plugin (and the IFramed plugin):
         array(
             'title'        => 'Home',
             'access_level' => VIEWER,
-            'url'          => 'plugin.php?page=IFramed/main&title=Home&url=https://my.domain.com/websvn/filedetails.php%3Frepname=pja%26path=%2Fproject_name%2Ftrunk%2FREADME.md%26usemime=1',
+            'url'          => 'plugin.php?page=IFramed/main&title=Home&url=https://my.domain.com/project4',
             'icon'         => 'fa-home',
-            'project_id'   => -1
+            'project_id'   => array ( 4, 5 )
+        )
+    );
+
+    $g_plugin_ProjectPages_main_menu_options_front = array(
+        array(
+            'title'        => 'Dashboard',
+            'access_level' => VIEWER,
+            'url'          => 'plugin.php?page=IFramed/main&title=Home&url=https://my.domain.com/project_name/dashboard',
+            'icon'         => 'fa-home',
+            'project_name' => array ( "Tickets", "Issues" )
         )
     );
 
@@ -53,28 +69,15 @@ Example config_inc.php entry using ProjectPages plugin (and the IFramed plugin):
             'access_level' => VIEWER,
             'url'          => 'plugin.php?page=IFramed/main&title=Home&url=https://my.domain.com/websvn/filedetails.php%3Frepname=pja%26path=%2Fproject_name%2Ftrunk%2FREADME.md%26usemime=1',
             'icon'         => 'fa-book',
-            'project_id'   => -1
-        ),
-        array(
-            'title'        => 'Developer Doc',
-            'access_level' => DEVELOPER,
-            'url'          => 'plugin.php?page=IFramed/main&title=Developer%20Doc&url=https://my.domain.com/doc/developernotes.md',
-            'icon'         => 'fa-book',
-            'project_id'   => -2
-        ),
-        array(
-            'title'        => 'History File',
-            'access_level' => REPORTER,
-            'url'          => 'plugin.php?page=IFramed/main&title=History.txt&url=https://my.domain.com/websvn/filedetails.php%3Frepname=pja%26path=%2Fproject_name%2Ftrunk%2Fdoc%2Fhistory.txt%26usemime=1',
-            'icon'         => 'fa-history',
-            'project_id'   => -1
+            'project_id'   => array ( -1 )
         ),
         array(
             'title'        => 'WebSVN',
             'access_level' => DEVELOPER,
             'url'          => 'plugin.php?page=IFramed/main&title=WebSVN&url=https://my.domain.com/websvn/listing.php%3Frepname=pja%26path=%2Fproject_name%2Ftrunk%2F',
             'icon'         => 'fa-code-fork',
-            'project_id'   => -1
+            'project_id'   => array ( -1 ),
+            'no_project_name' => array ( "UnversionedProjectName" )
         )
     );
 
