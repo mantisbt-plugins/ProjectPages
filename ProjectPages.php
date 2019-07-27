@@ -70,20 +70,96 @@ class ProjectPagesPlugin extends MantisPlugin
         {
             foreach ($options as $option)
             {
-                if ($project_id == $option['project_id'] || $option['project_id'] == -2 || 
-                    ($project_id != 0 && $option['project_id'] == -1))
+                if (isset($option['project_id']))
                 {
-                    $option['title'] = str_replace('project_name', $project_name, $option['title']);
-                    $option['url'] = str_replace('project_name', $project_name, $option['url']);
-                    $t_menu_option = array(
-                        'title' => $option['title'],
-                        'url' => $option['url'],
-                        'access_level' => $option['access_level'],
-                        'icon' => $option['icon']
-                    );
-                    $t_menu_options[] = $t_menu_option;
+                    foreach ($option['project_id'] as $t_proj_id)
+                    {
+                        if ($project_id == $t_proj_id || $t_proj_id == -2 || ($project_id != 0 && $t_proj_id == -1))
+                        {
+                            $t_ignore = false;
+
+                            if (isset($option['no_project_id']))
+                            {
+                                foreach ($option['no_project_id'] as $t_no_proj_id) 
+                                {
+                                    if ($project_id == $t_no_proj_id) {
+                                        $t_ignore = true;
+                                    }
+                                }
+                            }
+
+                            if (isset($option['no_project_name']))
+                            {
+                                foreach ($option['no_project_name'] as $t_no_proj_name) 
+                                {
+                                    if ($project_name == $t_no_proj_name) {
+                                        $t_ignore = true;
+                                    }
+                                }
+                            }
+
+                            if ($t_ignore) {
+                                continue;
+                            }
+
+                            $option['title'] = str_replace('project_name', $project_name, $option['title']);
+                            $option['url'] = str_replace('project_name', $project_name, $option['url']);
+                            $t_menu_option = array(
+                                'title' => $option['title'],
+                                'url' => $option['url'],
+                                'access_level' => $option['access_level'],
+                                'icon' => $option['icon']
+                            );
+                            $t_menu_options[] = $t_menu_option;
+                        }
+                    }
                 }
-                
+
+
+                if (isset($option['project_name']))
+                {
+                    foreach ($option['project_name'] as $t_proj_name)
+                    {
+                        if ($project_name == $t_proj_name)
+                        {
+                            $t_ignore = false;
+
+                            if (isset($option['no_project_id']))
+                            {
+                                foreach ($option['no_project_id'] as $t_no_proj_id) 
+                                {
+                                    if ($project_id == $t_no_proj_id) {
+                                        $t_ignore = true;
+                                    }
+                                }
+                            }
+
+                            if (isset($option['no_project_name']))
+                            {
+                                foreach ($option['no_project_name'] as $t_no_proj_name) 
+                                {
+                                    if ($project_name == $t_no_proj_name) {
+                                        $t_ignore = true;
+                                    }
+                                }
+                            }
+
+                            if ($t_ignore) {
+                                continue;
+                            }
+
+                            $option['title'] = str_replace('project_name', $project_name, $option['title']);
+                            $option['url'] = str_replace('project_name', $project_name, $option['url']);
+                            $t_menu_option = array(
+                                'title' => $option['title'],
+                                'url' => $option['url'],
+                                'access_level' => $option['access_level'],
+                                'icon' => $option['icon']
+                            );
+                            $t_menu_options[] = $t_menu_option;
+                        }
+                    }
+                }
             }
 		}
 
