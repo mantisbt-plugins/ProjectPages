@@ -1,5 +1,19 @@
 # PROJECTPAGES CHANGE LOG
 
+## Version 1.1.1 (July 29th, 2019)
+
+### Refactoring
+
+- **patch:** add example patch file layout_api.php v 2.21.1, see the README file
+
+### Build System
+
+- **app-publisher:** add config to publishrc for first mantisbt release
+
+### Documentation
+
+- **readme:** update version badges
+
 ## Version 1.1.0 (July 27th, 2019)
 
 ### Documentation
