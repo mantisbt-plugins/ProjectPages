@@ -7,11 +7,16 @@
 [![authors](https://img.shields.io/badge/authors-scott%20meesseman-6F02B5.svg?logo=visual%20studio%20code)](https://github.com/spmeesseman)
 [![GitHub issues open](https://img.shields.io/github/issues-raw/spmeesseman/ProjectPages.svg?maxAge=2592000&logo=github)](https://github.com/spmeesseman/ProjectPages/issues)
 [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/spmeesseman/ProjectPages.svg?maxAge=2592000&logo=github)](https://github.com/spmeesseman/ProjectPages/issues)
+[![MantisBT version current](https://app1.spmeesseman.com/projects/plugins/ApiExtend/api/versionbadge/ProjectPages/current)](https://app1.spmeesseman.com/projects)
+[![MantisBT version next](https://app1.spmeesseman.com/projects/plugins/ApiExtend/api/versionbadge/ProjectPages/next)](https://app1.spmeesseman.com/projects)
 
 - [ProjectPages MantisBT Plugin](#ProjectPages-MantisBT-Plugin)
   - [Description](#Description)
   - [Installation](#Installation)
   - [Usage](#Usage)
+    - [Usage - Configuration Parameters](#Usage---Configuration-Parameters)
+    - [Usage - Configuration Example](#Usage---Configuration-Example)
+  - [Patches](#Patches)
   - [Future Maybes](#Future-Maybes)
 
 ## Description
@@ -27,19 +32,54 @@ Extract the release archive to the MantisBT installations plugins folder:
     unzip ProjectPages.zip
     rm -f ProjectPages.zip
 
-Ensure to use the latest released version number in the download url.
+Ensure to use the latest released version number in the download url: [![MantisBT version current](https://app1.spmeesseman.com/projects/plugins/ApiExtend/api/versionbadge/ProjectPages/current)](https://app1.spmeesseman.com/projects)
 
 Install the plugin using the default installation procedure for a MantisBT plugin in `Manage -> Plugins`.
 
 ## Usage
 
-The project_id is set to the project_id that the link is to be displayed for, where:
+Two config values can be used to populate the MantisBT navigation sidebar:
 
-- `0` is the `All Projects` project
-- `-1` is all projects except for the `All Projects` project
+- $g_plugin_ProjectPages_main_menu_options_front
+- $g_plugin_ProjectPages_main_menu_options_back
+
+Respectively, each of these configs will place buttons at the front, or the back, of the navigation bar.
+
+The structure of a button config is as follows:
+
+    $g_plugin_ProjectPages_main_menu_options_back = array(
+        array(
+            'title'        => 'Home',
+            'access_level' => VIEWER,
+            'url'          => 'plugin.php?page=IFramed/main&title=Home&url=https://my.domain.com/project_name',
+            'icon'         => 'fa-home',
+            'project_id'   => array ( 4, 5 )
+        )
+    )
+
+### Usage - Configuration Parameters
+
+|Config Name|Descriptions|Required|
+|-|-|-|
+|title|The title pf the page, the text used in the button.  Note that this match match the `title` in the `url` query string for the button to properly highlight when the page is the currently selected one.  See the [Patches](#Patches) section for more details.|Yes|
+|access_level|The access level to be used to determine whether the button should be displayed to the currently logged in user|Yes|
+|url|The url of the page to be navigated to when the button id clicked|Yes|
+|icon|The Font Awesome icon css class|Yes|
+|project_id|An array of ids that the button will be displayed for|Yes|
+|no_project_id|An array of ids that the button will NOT be displayed for (an exclusion list)|No|
+|project_name|An array of project names that the button will be displayed for|Yes|
+|no_project_name|An array of project names that the button will NOT be displayed for (an exclusion list)|No|
+
+Note that one of either `project_id` or `project_name` is required, but not both.
+
+The  `project_id` can be used for special configurations, where:
+
+- `-1` is all projects except for the 'All Projects' project
 - `-2` is all projects
 
 Note that the keyword `project_name` in the URL text is replaced with the currently loaded MantisBT project's name.
+
+### Usage - Configuration Example
 
 Example config_inc.php entry using ProjectPages plugin (and the IFramed plugin):
 
@@ -47,17 +87,14 @@ Example config_inc.php entry using ProjectPages plugin (and the IFramed plugin):
         array(
             'title'        => 'Home',
             'access_level' => VIEWER,
-            'url'          => 'plugin.php?page=IFramed/main&title=Home&url=https://my.domain.com/project4',
+            'url'          => 'plugin.php?page=IFramed/main&title=Home&url=https://my.domain.com/project_name',
             'icon'         => 'fa-home',
             'project_id'   => array ( 4, 5 )
-        )
-    );
-
-    $g_plugin_ProjectPages_main_menu_options_front = array(
+        ),
         array(
             'title'        => 'Dashboard',
             'access_level' => VIEWER,
-            'url'          => 'plugin.php?page=IFramed/main&title=Home&url=https://my.domain.com/project_name/dashboard',
+            'url'          => 'plugin.php?page=IFramed/main&title=Dashboard&url=https://my.domain.com/project_name/dashboard',
             'icon'         => 'fa-home',
             'project_name' => array ( "Tickets", "Issues" )
         )
@@ -67,7 +104,7 @@ Example config_inc.php entry using ProjectPages plugin (and the IFramed plugin):
         array(
             'title'        => 'Read Me',
             'access_level' => VIEWER,
-            'url'          => 'plugin.php?page=IFramed/main&title=Home&url=https://my.domain.com/websvn/filedetails.php%3Frepname=pja%26path=%2Fproject_name%2Ftrunk%2FREADME.md%26usemime=1',
+            'url'          => 'plugin.php?page=IFramed/main&title=Read%20Me&url=https://my.domain.com/websvn/filedetails.php%3Frepname=pja%26path=%2Fproject_name%2Ftrunk%2FREADME.md%26usemime=1',
             'icon'         => 'fa-book',
             'project_id'   => array ( -1 )
         ),
@@ -81,9 +118,21 @@ Example config_inc.php entry using ProjectPages plugin (and the IFramed plugin):
         )
     );
 
+## Patches
+
+To enable navigation buttons to be 'highlighted' when selected, the core MantisBT file '/core/layout_api.php' requires modification.  The complete file can be found in the patches directory of this plugin, taken from MantisBT 2.21.1 and customized.  Note there are other customizations present in this file, the code that is specific to this functionality can be found that the beginning of the layout_sidebar_menu() function:
+
+    if( $p_page == $p_active_sidebar_page ||
+        $p_page == basename( $_SERVER['SCRIPT_NAME'] ) ||
+        stripos(str_replace("%20", " ", $_SERVER['QUERY_STRING']), "title=".$p_title) != FALSE ||
+        (strpos($_SERVER['QUERY_STRING'], 'Source/index') != FALSE && ( $p_title == 'Repositories' || $p_title == 'Search' ) ) ||
+        (strpos($_SERVER['QUERY_STRING'], 'Taskodrome/main') != FALSE && $p_title == 'Scrum Board' ) ) {
+        echo '<li class="active">' . "\n";
+    } else {
+        echo '<li>' . "\n";
+    }
+
 ## Future Maybes
 
 - Support for user level link access (as opposed to project level)
-- Support for inerse user level link access (a list of users to 'not' display a page for)
-- Support for an array of project ids to display a page for (instead of only 1 project id)
-- Support for an array of project ids to 'not' display a page for (display for all other projects)
+- Support for inverse user level link access (a list of users to 'not' display a page for)
