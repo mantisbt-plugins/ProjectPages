@@ -5,8 +5,8 @@
 [![app-publisher](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-app--publisher-e10000.svg)](https://github.com/spmeesseman/app-publisher)
 [![authors](https://img.shields.io/badge/authors-scott%20meesseman-6F02B5.svg?logo=visual%20studio%20code)](https://github.com/spmeesseman)
 
-[![GitHub issues open](https://img.shields.io/github/issues-raw/spmeesseman/ProjectPages.svg?maxAge=2592000&logo=github)](https://github.com/spmeesseman/ProjectPages/issues)
-[![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/spmeesseman/ProjectPages.svg?maxAge=2592000&logo=github)](https://github.com/spmeesseman/ProjectPages/issues)
+[![GitHub issues open](https://img.shields.io/github/issues-raw/spmeesseman/ProjectPages.svg?maxAge=2592000&logo=github)](https://github.com/mantisbt-plugins/ProjectPages/issues)
+[![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/spmeesseman/ProjectPages.svg?maxAge=2592000&logo=github)](https://github.com/mantisbt-plugins/ProjectPages/issues)
 [![MantisBT issues open](https://app1.spmeesseman.com/projects/plugins/ApiExtend/api/issues/countbadge/ProjectPages/open)](https://app1.spmeesseman.com/projects/set_project.php?project=ProjectPages&make_default=no&ref=bug_report_page.php)
 [![MantisBT issues closed](https://app1.spmeesseman.com/projects/plugins/ApiExtend/api/issues/countbadge/ProjectPages/closed)](https://app1.spmeesseman.com/projects/set_project.php?project=ProjectPages&make_default=no&ref=bug_report_page.php)
 [![MantisBT version current](https://app1.spmeesseman.com/projects/plugins/ApiExtend/api/versionbadge/ProjectPages/current)](https://app1.spmeesseman.com/projects/set_project.php?project=ProjectPages&make_default=no&ref=plugin.php?page=Releases/releases)
@@ -19,7 +19,7 @@
     - [Usage - Configuration Parameters](#Usage---Configuration-Parameters)
     - [Usage - Configuration Example](#Usage---Configuration-Example)
   - [Patches](#Patches)
-  - [Future Maybes](#Future-Maybes)
+  - [Todos](#Todos)
 
 ## Description
 
@@ -30,11 +30,11 @@ This plugin allows for setting up navigation bar links based on the current proj
 Extract the release archive to the MantisBT installations plugins folder:
 
     cd /var/www/mantisbt/plugins
-    wget -O ProjectPages.zip https://github.com/spmeesseman/Releases/releases/download/v1.0.0/ProjectPages.zip
+    wget -O ProjectPages.zip https://github.com/mantisbt-plugins/Releases/releases/download/v1.0.0/ProjectPages.zip
     unzip ProjectPages.zip
     rm -f ProjectPages.zip
 
-Ensure to use the latest released version number in the download url: [![MantisBT version current](https://app1.spmeesseman.com/projects/plugins/ApiExtend/api/versionbadge/ProjectPages/current)](https://app1.spmeesseman.com/projects) (version badge available via the [ApiExtend Plugin](https://github.com/spmeesseman/ApiExtend))
+Ensure to use the latest released version number in the download url: [![MantisBT version current](https://app1.spmeesseman.com/projects/plugins/ApiExtend/api/versionbadge/ProjectPages/current)](https://app1.spmeesseman.com/projects) (version badge available via the [ApiExtend Plugin](https://github.com/mantisbt-plugins/ApiExtend))
 
 Install the plugin using the default installation procedure for a MantisBT plugin in `Manage -> Plugins`.
 
@@ -134,7 +134,7 @@ To enable navigation buttons to be 'highlighted' when selected, the core MantisB
         echo '<li>' . "\n";
     }
 
-## Future Maybes
+## Todos
 
-- Support for user level link access (as opposed to project level)
-- Support for inverse user level link access (a list of users to 'not' display a page for)
+- [ ] Support for user level link access (as opposed to project level)
+- [ ] Support for inverse user level link access (a list of users to 'not' display a page for)

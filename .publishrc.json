@@ -49,7 +49,7 @@
     "pathPreRoot":       "",
     "postBuildCommand":  "",
     "repoType":          "git",
-    "repo":              "https://github.com/spmeesseman/ProjectPages.git",
+    "repo":              "https://github.com/mantisbt-plugins/ProjectPages.git",
     "skipCommit":        "N",
     "skipDeployPush":    "N",
     "testEmailRecip":    "spmeesseman@gmail.com",
