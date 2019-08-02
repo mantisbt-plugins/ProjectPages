@@ -15,6 +15,7 @@
 - [ProjectPages MantisBT Plugin](#ProjectPages-MantisBT-Plugin)
   - [Description](#Description)
   - [Installation](#Installation)
+  - [Issues and Feature Requests](#Issues-and-Feature-Requests)
   - [Usage](#Usage)
     - [Usage - Configuration Parameters](#Usage---Configuration-Parameters)
     - [Usage - Configuration Example](#Usage---Configuration-Example)
