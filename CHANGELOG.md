@@ -1,5 +1,21 @@
 # PROJECTPAGES CHANGE LOG
 
+## Version 1.1.2 (August 3rd, 2019)
+
+### Build System
+
+- **ap:** add gzip tarball to mantisbt and github release assets
+
+### Documentation
+
+- **README:** add current version badge plug
+- **README:** update ApiExtend badges
+- **README:** update toc
+
+### Build System
+
+- **ap:** add gzip tarball to mantisbt and github release assets
+
 ## Version 1.1.1 (July 29th, 2019)
 
 ### Refactoring
