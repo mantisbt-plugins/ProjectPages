@@ -12,10 +12,6 @@
 - **README:** update ApiExtend badges
 - **README:** update toc
 
-### Build System
-
-- **ap:** add gzip tarball to mantisbt and github release assets
-
 ## Version 1.1.1 (July 29th, 2019)
 
 ### Refactoring
