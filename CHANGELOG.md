@@ -1,5 +1,11 @@
 # PROJECTPAGES CHANGE LOG
 
+## Version 1.1.3 (August 3rd, 2019)
+
+### Build System
+
+- **ap:** invalid changelog section breaks realease notes parsing
+
 ## Version 1.1.2 (August 3rd, 2019)
 
 ### Build System
