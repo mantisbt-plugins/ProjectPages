@@ -24,7 +24,7 @@
     "emailSender":       "",
     "githubRelease":     "Y",
     "githubAssets": [
-        "build\\ProjectPages.tgz|GZip Tarball",
+        "build\\ProjectPages.tgz",
         "build\\ProjectPages.zip"
     ],
     "githubUser":        "mantisbt-plugins",
