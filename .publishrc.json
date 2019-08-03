@@ -7,6 +7,7 @@
         "cmd /c copy /Y LICENSE.txt build\\ProjectPages",
         "cmd /c copy /Y ProjectPages.php build\\ProjectPages",
         "Compress-Archive -Path build\\ProjectPages -Update -CompressionLevel Optimal -DestinationPath build\\ProjectPages.zip",
+        "tar -czf build/ProjectPages.tgz build\\ProjectPages",
         "cmd /c rmdir /S /Q build\\ProjectPages"
     ],
     "changelogFile":     "CHANGELOG.md",
@@ -23,6 +24,7 @@
     "emailSender":       "",
     "githubRelease":     "Y",
     "githubAssets": [
+        "build\\ProjectPages.tgz|GZip Tarball",
         "build\\ProjectPages.zip"
     ],
     "githubUser":        "mantisbt-plugins",
@@ -36,6 +38,7 @@
     "mantisbtUrl":       "https://app1.spmeesseman.com/projects",
     "mantisbtApiToken":  "${MANTIS_API_TOKEN}",
     "mantisbtAssets": [
+        "build\\ProjectPages.tgz|GZip Tarball",
         "build\\ProjectPages.zip|Zip Archive"
     ],
     "npmPackDist":       "N",
