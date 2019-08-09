@@ -1,5 +1,11 @@
 # PROJECTPAGES CHANGE LOG
 
+## Version 1.1.4 (August 8th, 2019)
+
+### Bug Fixes
+
+- tgz release package does not contain the plugin directory as the top level
+
 ## Version 1.1.3 (August 3rd, 2019)
 
 ### Build System
